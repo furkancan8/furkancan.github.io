@@ -355,6 +355,36 @@
     .footer-copy { font-size: 0.82rem; color: rgba(250,247,242,0.4); }
     .footer-copy strong { color: rgba(250,247,242,0.75); font-weight: 500; }
 
+    /* ── GALERİ ── */
+    .galeri-grid { display: grid; gap: 1.5rem; }
+    .galeri-3 { grid-template-columns: repeat(3, 1fr); }
+    .galeri-2 { grid-template-columns: repeat(2, 1fr); max-width: 760px; }
+    .galeri-item { display: flex; flex-direction: column; gap: 0.7rem; }
+    .galeri-img-wrap {
+      aspect-ratio: 16/10;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--dark-mid);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .galeri-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .galeri-img-wrap:hover img { transform: scale(1.04); }
+    .galeri-ph {
+      position: absolute; inset: 0;
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.5rem;
+      color: rgba(250,247,242,0.3); font-size: 0.78rem; text-align: center;
+    }
+    .galeri-ph span:first-child { font-size: 2.2rem; }
+    .galeri-cap { font-size: 0.8rem; color: rgba(250,247,242,0.45); text-align: center; }
+    @media (max-width: 680px) {
+      .galeri-3, .galeri-2 { grid-template-columns: 1fr !important; max-width: 100%; }
+    }
+
     /* ── ANİMASYONLAR ── */
     .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -717,6 +747,10 @@ Kalite standartlarına uygun olarak gerekli kayıtları tutmak, dokümantasyon s
         <div class="edu-degree">KLINGELNBERG certificate</div>
         <div class="edu-school">P40 Makine eğitimi</div>
         <div class="edu-year">2025</div>
+        <a href="#galeri" class="project-link" onclick="openGallery('klingelnberg')" style="margin-top:1rem; color:var(--accent);">
+          View
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -739,7 +773,7 @@ Kalite standartlarına uygun olarak gerekli kayıtları tutmak, dokümantasyon s
           <div class="project-cat">GAME</div>
           <div class="project-title">Horror Game</div>
           <p class="project-desc">That's developed with Unreal engine 5.</p>
-          <a href="#" class="project-link">
+          <a href="#galeri" class="project-link" onclick="openGallery('horror')">
             View
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
           </a>
@@ -749,7 +783,7 @@ Kalite standartlarına uygun olarak gerekli kayıtları tutmak, dokümantasyon s
         <div class="project-thumb">📊</div>
         <div class="project-body">
           <div class="project-cat">WEB SITE</div>
-          <div class="project-title">ENGLISH LEVEL TEST</div>
+          <div class="project-title">English level test</div>
           <p class="project-desc">A website that measures speaking, writing, reading, and listening skills separately.</p>
         </div>
       </div>
@@ -757,7 +791,82 @@ Kalite standartlarına uygun olarak gerekli kayıtları tutmak, dokümantasyon s
   </div>
 </section>
 
+<!-- ════════════════════════════════════════
+     GALERİ
+════════════════════════════════════════ -->
+<section id="galeri" style="display:none; background:var(--dark); padding:5rem 0;">
+  <div class="container">
 
+    <!-- Başlık + Kapat -->
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:2.5rem; gap:1rem;">
+      <div>
+        <p class="section-label" style="color:#e8bfa8;" id="galeri-label">Project Gallery</p>
+        <h2 id="galeri-title" style="color:var(--cream); font-family:var(--f-serif);"></h2>
+        <p id="galeri-desc" style="margin-top:0.75rem; font-size:0.88rem; color:rgba(250,247,242,0.5); max-width:560px;"></p>
+      </div>
+      <button
+        id="galeri-close-btn"
+        onclick="closeGallery()"
+        style="flex-shrink:0; margin-top:0.25rem; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:50%; width:44px; height:44px; cursor:pointer; color:rgba(250,247,242,0.65); font-size:1.1rem; display:flex; align-items:center; justify-content:center; transition:background 0.2s, color 0.2s;"
+        onmouseover="this.style.background='rgba(200,89,42,0.35)';this.style.color='#fff';"
+        onmouseout="this.style.background='rgba(255,255,255,0.07)';this.style.color='rgba(250,247,242,0.65)';"
+        aria-label="Galeriyi kapat">✕</button>
+    </div>
+
+    <!-- GRUP 1: Horror Game — 3 resim -->
+    <div id="group-horror" style="display:none;">
+      <div class="galeri-grid galeri-3">
+        <div class="galeri-item">
+          <div class="galeri-img-wrap">
+            <img src="resim-2.png" alt="Horror Game — Sahne 1"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="galeri-ph"><span>🎮</span><span>horror1.jpg</span></div>
+          </div>
+          <div class="galeri-cap">Scene 1</div>
+        </div>
+        <div class="galeri-item">
+          <div class="galeri-img-wrap">
+            <img src="resim-3.png" alt="Horror Game — Sahne 2"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="galeri-ph"><span>👻</span><span>horror2.jpg</span></div>
+          </div>
+          <div class="galeri-cap">Scene 2</div>
+        </div>
+        <div class="galeri-item">
+          <div class="galeri-img-wrap">
+            <img src="resim-4.png" alt="Horror Game — Sahne 3"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="galeri-ph"><span>🌑</span><span>horror3.jpg</span></div>
+          </div>
+          <div class="galeri-cap">Scene 3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRUP 2: KLINGELNBERG — 2 resim -->
+    <div id="group-klingelnberg" style="display:none;">
+      <div class="galeri-grid galeri-2">
+        <div class="galeri-item">
+          <div class="galeri-img-wrap">
+            <img src="resim-5.jpeg" alt="KLINGELNBERG — 1"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="galeri-ph"><span>📜</span><span>kling1.jpg</span></div>
+          </div>
+          <div class="galeri-cap">Certificate</div>
+        </div>
+        <div class="galeri-item">
+          <div class="galeri-img-wrap">
+            <img src="resim-6.jpeg" alt="KLINGELNBERG — 2" 
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="galeri-ph"><span>⚙️</span><span>kling2.jpg</span></div>
+          </div>
+          <div class="galeri-cap">P40 Training</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <section id="basvuru">
   <div class="container">
@@ -887,6 +996,39 @@ Kalite standartlarına uygun olarak gerekli kayıtları tutmak, dokümantasyon s
 ════════════════════════════════════════ -->
 
 <script>
+  /* ── GALERİ ── */
+  const galeriData = {
+    horror: {
+      label: 'Project Gallery',
+      title: 'Horror Game',
+      desc:  'Screenshots from the first-person horror game developed with Unreal Engine 5.',
+      group: 'group-horror'
+    },
+    klingelnberg: {
+      label: 'Certificate Gallery',
+      title: 'KLINGELNBERG Certificate',
+      desc:  'P40 machine training certificate and related documents.',
+      group: 'group-klingelnberg'
+    }
+  };
+
+  function openGallery(type) {
+    const data    = galeriData[type];
+    const section = document.getElementById('galeri');
+    document.getElementById('group-horror').style.display       = 'none';
+    document.getElementById('group-klingelnberg').style.display = 'none';
+    document.getElementById('galeri-label').textContent = data.label;
+    document.getElementById('galeri-title').textContent = data.title;
+    document.getElementById('galeri-desc').textContent  = data.desc;
+    document.getElementById(data.group).style.display   = 'block';
+    section.style.display = 'block';
+    setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+  }
+
+  function closeGallery() {
+    document.getElementById('galeri').style.display = 'none';
+  }
+
   /* ── NAVBAR ── */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -929,43 +1071,6 @@ Kalite standartlarına uygun olarak gerekli kayıtları tutmak, dokümantasyon s
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('#yetenekler .skills-grid > div').forEach(el => skillObserver.observe(el));
-
-  /* ── ÖN YAZI OLUŞTURUCU ── */
-  function generateCoverLetter() {
-    const company  = document.getElementById('f-company').value.trim()  || '[Şirket Adı]';
-    const position = document.getElementById('f-position').value.trim() || '[Pozisyon]';
-    const name     = document.getElementById('f-name').value.trim()     || 'Ad Soyad';
-    const type     = document.getElementById('f-type').value;
-    const why      = document.getElementById('f-why').value.trim();
-    const skills   = document.getElementById('f-skills').value.trim()   || 'React, TypeScript, Node.js';
-    const today    = new Date().toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
-
-    let typeIntro = '';
-    if (type === 'referans') typeIntro = `Çevremdeki değerli bağlantılar aracılığıyla duyduğum `;
-    else if (type === 'spontan') typeIntro = `Aktif olarak ilan verilmese de, ${company} bünyesinde katkı sağlayabileceğimi düşündüğüm `;
-    else typeIntro = ``;
-
-    const whyBlock = why
-      ? `\n${why}\n`
-      : `\n${company}'nin yenilikçi yaklaşımı ve sektördeki güçlü konumu, bu rolün benim için doğru bir adım olduğuna inandırıyor.\n`;
-
-    const letter = ``;
-
-    const box = document.getElementById('gen-output');
-    box.textContent = letter;
-    box.style.display = 'block';
-    document.getElementById('copy-btn').style.display = 'inline-block';
-    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  function copyText() {
-    const text = document.getElementById('gen-output').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById('copy-btn');
-      btn.textContent = '✓ Kopyalandı!';
-      setTimeout(() => { btn.textContent = '📋 Metni kopyala'; }, 2500);
-    });
-  }
 
   /* ── İLETİŞİM FORMU ── */
   function sendMessage() {
